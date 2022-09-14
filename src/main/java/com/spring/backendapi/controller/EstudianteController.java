@@ -3,21 +3,31 @@ package com.spring.backendapi.controller;
 
 import com.spring.backendapi.entities.Estudiante;
 import com.spring.backendapi.model.Response;
+import com.spring.backendapi.model.ResponseSQL;
 import com.spring.backendapi.service.EstudianteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.PersistenceException;
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("api/estudiantes")
 public class EstudianteController {
 
     @Autowired
     private EstudianteService estudianteService;
+
+    @PostMapping
+    public ResponseEntity<Estudiante> registrar(@Valid @RequestBody Estudiante estudiante){
+
+        return new ResponseEntity<Estudiante>(estudianteService.registrar(estudiante), HttpStatus.CREATED);
+
+    }
 
     @GetMapping
     public List<Estudiante> obtenerEstudiantes(){
@@ -29,10 +39,6 @@ public class EstudianteController {
         return new ResponseEntity<>(estudianteService.findByEstudianteId(estudianteId),HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<Estudiante> registrar(@Valid @RequestBody Estudiante estudiante){
-        return new ResponseEntity<Estudiante>(estudianteService.registrar(estudiante), HttpStatus.CREATED);
-    }
 
     @PutMapping("/{estudianteId}")
     public ResponseEntity<Estudiante> actualizar(@PathVariable Long estudianteId, @RequestBody @Valid Estudiante estudiante) {

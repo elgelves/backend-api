@@ -16,6 +16,4 @@ public class Modulo {
     @Column(name = "modulo_nombre")
     private String moduloNombre;
 
-
-
 }

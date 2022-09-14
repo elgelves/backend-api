@@ -28,4 +28,5 @@ public class ControllerExceptions {
                         ex.getBindingResult().getFieldError().getDefaultMessage().toUpperCase()),
                 HttpStatus.BAD_REQUEST);
     }
+
 }

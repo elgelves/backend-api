@@ -9,7 +9,7 @@ public class Curso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="curso_id")
+    @Column(name ="curso_id", unique = true)
     private Long cursoId;
 
     @Column(name ="curso_nombre")
